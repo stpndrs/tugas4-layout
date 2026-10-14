@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Transaksi Pembelian - Sleepy POS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .skeleton {
+            background-color: #e0e0e0;
+            background: linear-gradient(90deg,
+                    #f0f0f0 25%,
+                    #e0e0e0 50%,
+                    #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s ease-in-out infinite;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skeleton-text {
+            height: 1rem;
+            margin-bottom: 0;
+        }
+
+        .skeleton-topbar-title {
+            height: 1.25rem;
+            width: 200px;
+        }
+
+        .skeleton-title {
+            height: 2.25rem;
+            width: min(460px, 90%);
+            border-radius: 6px;
+        }
+
+        .skeleton-search {
+            height: 56px;
+            width: 100%;
+            max-width: 432px;
+            border-radius: 14px;
+        }
+
+        .skeleton-btn {
+            height: 48px;
+            width: 180px;
+            border-radius: 8px;
+        }
+
+        .skeleton-icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .skeleton-pager {
+            height: 24px;
+            border-radius: 5px;
+        }
+
+        .topbar {
+            border-bottom: 1px solid #eee;
+            padding: 1.15rem 1rem;
+        }
+
+        .table-card {
+            border: 1px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 0.5rem 1.25rem 0;
+            background: #fff;
+            overflow-x: auto;
+        }
+
+        .table-card table {
+            margin-bottom: 0;
+            min-width: 860px;
+        }
+
+        .table-card thead th {
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #bdbdbd;
+            padding: 1.5rem 0.5rem 1.25rem;
+        }
+
+        .table-card tbody td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 0.7rem 0.5rem;
+            border-bottom: 1px solid #bdbdbd;
+            height: 53px;
+        }
+
+        .table-card tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .table-card {
+                padding: 0.25rem 0.75rem 0;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .topbar {
+                padding: 1rem;
+            }
+
+            .skeleton-title {
+                height: 1.9rem;
+            }
+
+            .skeleton-search {
+                height: 50px;
+                max-width: 100%;
+            }
+
+            .skeleton-btn {
+                width: 100%;
+                height: 46px;
+            }
+
+            .skeleton-pager-wrap {
+                justify-content: center !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- Topbar -->
+    <nav class="topbar">
+        <div class="skeleton skeleton-topbar-title d-block"></div>
+    </nav>
+
+    <div class="container-fluid px-3 px-md-4 mx-auto" style="max-width: 1240px;">
+        <header class="my-4">
+            <div class="skeleton skeleton-title d-block"></div>
+        </header>
+
+        <main>
+            <!-- Pencarian & tombol tambah -->
+            <section class="row align-items-center gy-3 mb-4">
+                <div class="col-12 col-md">
+                    <div class="skeleton skeleton-search d-block"></div>
+                </div>
+                <div class="col-12 col-md-auto">
+                    <div class="skeleton skeleton-btn d-block"></div>
+                </div>
+            </section>
+
+            <!-- Tabel -->
+            <section class="table-card">
+                <table class="table table-borderless align-middle">
+                    <thead>
+                        <tr>
+                            <th><div class="skeleton skeleton-text" style="width: 85%;"></div></th>
+                            <th><div class="skeleton skeleton-text" style="width: 60%;"></div></th>
+                            <th><div class="skeleton skeleton-text" style="width: 75%;"></div></th>
+                            <th><div class="skeleton skeleton-text" style="width: 55%;"></div></th>
+                            <th><div class="skeleton skeleton-text" style="width: 70%;"></div></th>
+                            <th>
+                                <div class="skeleton skeleton-text d-block mx-auto mb-1" style="width: 55%;"></div>
+                                <div class="skeleton skeleton-text d-block mx-auto" style="width: 75%;"></div>
+                            </th>
+                            <th><div class="skeleton skeleton-text" style="width: 50%;"></div></th>
+                        </tr>
+                    </thead>
+                    <tbody id="skeletonRows">
+                        <!-- 10 baris skeleton (dibuat lewat script di bawah) -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Paginasi -->
+            <section class="d-flex justify-content-end skeleton-pager-wrap my-4">
+                <div class="d-inline-flex align-items-center gap-3 p-2 px-3 bg-white rounded-3 shadow-sm flex-wrap"
+                    style="box-shadow: 0 2px 8px rgba(0,0,0,.12) !important;">
+                    <div class="skeleton skeleton-pager" style="width: 14px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 24px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 18px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 18px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 18px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 18px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 14px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 68px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 80px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 28px;"></div>
+                    <div class="skeleton skeleton-pager" style="width: 30px;"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Membuat 10 baris skeleton agar HTML tetap ringkas
+        (function () {
+            var row =
+                '<tr>' +
+                '<td><div class="skeleton skeleton-text" style="width: 55%;"></div></td>' +
+                '<td><div class="skeleton skeleton-text" style="width: 70%;"></div></td>' +
+                '<td><div class="skeleton skeleton-text" style="width: 60%;"></div></td>' +
+                '<td><div class="skeleton skeleton-text" style="width: 75%;"></div></td>' +
+                '<td><div class="skeleton skeleton-text" style="width: 65%;"></div></td>' +
+                '<td><div class="skeleton skeleton-icon-btn"></div></td>' +
+                '<td><div class="skeleton skeleton-icon-btn"></div></td>' +
+                '</tr>';
+            document.getElementById('skeletonRows').innerHTML = new Array(11).join(row);
+        })();
+    </script>
+</body>
+
+</html>

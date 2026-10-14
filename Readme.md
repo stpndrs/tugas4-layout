@@ -10,4 +10,4 @@ https://github.com/stpndrs/tugas4-layout
 
 ## Pembagian File
 
-- Stevan Andreas (103082430002) : sales.html
+- Muh Fadhil Ahnaf(103082400012) : purchases.html
